@@ -1,4 +1,6 @@
 package inspecciones;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -76,6 +78,23 @@ public class Inspecciones {
 				.max(Comparator.comparing(Inspeccion::fecha))
 				.orElse(null);
 		
+	}
+	
+	public SortedSet<Inspeccion> obtenerInspeccionesEnFechas(LocalDate fecha1,LocalDate fecha2) {
+		     
+				Comparator<Inspeccion> c = Comparator.comparing(Inspeccion::distrito);
+			inspecciones.stream()
+				.filter(inspeccion->inspeccion.fecha().isAfter(fecha1) 
+						&& inspeccion.fecha().isBefore(fecha2)
+						.equals(Period.between(fecha1, fecha2)))
+				.collect(Collectors.toCollection(()->new TreeSet<Inspeccion>(c)));
+					
+	}
+	
+	public String obtenerRestauranteCritico(String name) {
+		return inspecciones.stream()
+				.filter(Inspeccion->Inspeccion.nombre.equals(name));
+		        .all
 	}
 	
 

@@ -12,8 +12,8 @@ public record Inspeccion(String id, String nombre, Distrito distrito, String tip
 		Checkers.check("Fecha inadecuada ", fecha.isAfter(LocalDate.of(1900, 1, 1)));
 	}
 	
-	public Integer tiempoTranscurrido() {
-		return fecha.
+	public Period tiempoTranscurrido() {
+		return Period.between(fecha, LocalDate.now());
 	}
 
 }
